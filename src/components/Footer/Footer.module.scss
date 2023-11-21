@@ -1,0 +1,19 @@
+.footer {
+  display: flex;
+  color: var(--footer-color);
+  box-shadow: 0px -2px 4px 0px rgba(223, 223, 223, 0.25);
+  padding: 11px 0;
+
+  .footerInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+
+    a {
+      display: flex;
+      align-items: center;
+      color: var(--footer-color);
+    }
+  }
+}
+

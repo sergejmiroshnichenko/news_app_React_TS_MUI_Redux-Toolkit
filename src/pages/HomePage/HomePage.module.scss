@@ -1,0 +1,30 @@
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchPanel {
+  margin: 30px auto 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchPanel h1 {
+  width: 791px;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--main-color);
+  letter-spacing: 0.04em;
+}
+
+.searchPanel > *:not(h1) {
+  margin-left: 20px;
+}
+
+.filtersGroup {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}

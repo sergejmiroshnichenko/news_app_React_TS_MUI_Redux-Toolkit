@@ -1,13 +1,12 @@
-import './App.css'
+import { AppRoutes } from 'routes/Routes.tsx';
+import './variables.module.scss';
 
 function App() {
-
-
   return (
     <>
-        <h1>Hello world!!! </h1>
+      <AppRoutes />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
