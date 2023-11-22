@@ -21,7 +21,7 @@ export const fetchAllArticles = createAsyncThunk<
 >('articles/fetchAllArticles', async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get<IGetArticlesRequest>(
-      'https://newsapi.org/v2/top-headlines?country=ua&apiKey=d51f5b077ce848d8ae13421ff6c820ec',
+      'https://newsapi.org/v2/top-headlines?country=us&apiKey=d51f5b077ce848d8ae13421ff6c820ec',
     );
     if (response.status !== 200) {
       return rejectWithValue('Server error');

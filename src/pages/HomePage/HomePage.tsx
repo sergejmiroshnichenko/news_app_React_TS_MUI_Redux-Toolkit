@@ -8,7 +8,21 @@ import { categoryOptions, countryOptions } from 'components/Select/Select.data.t
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks.ts';
 import { fetchAllArticles } from 'store/slices/articlesSlice.ts';
-import { ArticleItem } from 'components/ArticleItem/ArticleItem.tsx';
+import LinkIcon from '@mui/icons-material/Link';
+import {
+  Box,
+  Paper,
+  Stack,
+  styled,
+  Table,
+  TableBody,
+  TableCell,
+  tableCellClasses,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material';
 
 export const HomePage = () => {
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
@@ -25,32 +39,87 @@ export const HomePage = () => {
     setIsFiltersVisible(!isFiltersVisible);
   };
 
+  const headers = ['Image', 'Title', 'Authors', 'Description', 'Publication date', 'Original URL'];
+
+  const StyledTableCell = styled(TableCell)({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: '#EFEFF3',
+      color: 'var(--main-color)',
+      letterSpacing: '0.03em',
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+      borderRight: '1px solid var(--table-color)',
+    },
+  });
+
+  const truncateText = (text: string, maxLength: number) => {
+    return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+  };
+
   return (
     <Layout className={styles.wrapper}>
-      <div className={styles.searchPanel}>
-        <h1>Formula Top Headlines</h1>
-        <Search setSearchKeyword={() => {}} />
-        <PrimaryButton
-          color="inherit"
-          onClick={toggleFilters}
-          startIcon={<img src={Filter} alt="filter image" />}>
-          Filters
-        </PrimaryButton>
-      </div>
+      <Stack direction="row" alignItems="center" mt={3.7} mb={2}>
+        <Typography variant="h5" component="h2">
+          Formula Top Headlines
+        </Typography>
+        <Box marginLeft="auto" display="flex" gap={2.5}>
+          <Search setSearchKeyword={() => {}} />
+          <PrimaryButton
+            onClick={toggleFilters}
+            startIcon={<img src={Filter} alt="filter image" />}>
+            Filters
+          </PrimaryButton>
+        </Box>
+      </Stack>
 
       {isFiltersVisible && (
-        <div className={styles.filtersGroup}>
+        <Box display="flex" gap={2} mb={1.8}>
           <SelectComponent title="Category" options={categoryOptions} />
           <SelectComponent title="Country" options={countryOptions} />
-        </div>
+        </Box>
       )}
 
       {error ? (
-        <h1>Error occurred :{error}</h1>
+        <Typography variant="h2" color="error" textAlign="center">
+          Error occurred :{error}
+        </Typography>
       ) : isLoading ? (
-        <div>
-          {articles?.map((article) => <ArticleItem key={article.description} {...article} />)}
-        </div>
+        <Paper sx={{ overflow: 'hidden' }}>
+          <TableContainer sx={{ maxHeight: 420 }}>
+            <Table stickyHeader>
+              <TableHead>
+                <TableRow>
+                  {headers.map((header) => (
+                    <StyledTableCell key={header}>{header}</StyledTableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {articles?.map((article) => {
+                  return (
+                    <TableRow key={article.description}>
+                      <StyledTableCell sx={{ width: '12%' }}>
+                        <img width={100} height={70} src={article.urlToImage} alt="image" />
+                      </StyledTableCell>
+                      <StyledTableCell sx={{ width: '23%' }}>
+                        {truncateText(article.title, 50)}
+                      </StyledTableCell>
+                      <StyledTableCell sx={{ width: '16%' }}>{article.author}</StyledTableCell>
+                      <StyledTableCell sx={{ width: '26%' }}>
+                        {truncateText(article.description, 70)}
+                      </StyledTableCell>
+                      <StyledTableCell sx={{ width: '12%' }}>{article.publishedAt}</StyledTableCell>
+                      <TableCell sx={{ width: '11%', textAlign: 'center' }}>
+                        <LinkIcon />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
       ) : (
         <p>Loading...</p>
       )}

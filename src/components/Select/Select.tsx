@@ -28,7 +28,7 @@ export const SelectComponent: FC<SelectFieldProps> = ({ options, title }) => {
       </Grid>
       <Grid item>
         <FormControl size="small" sx={{ width: 250 }}>
-          <InputLabel id="demo-simple-select-label">Select</InputLabel>
+          <InputLabel sx={{ fontSize: 13 }}>Select</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -38,7 +38,7 @@ export const SelectComponent: FC<SelectFieldProps> = ({ options, title }) => {
             onChange={handleChange}>
             {options.map((option) => (
               <MenuItem key={option} value={option}>
-                <ListItemText primary={option} />
+                <ListItemText secondary={option} />
               </MenuItem>
             ))}
           </Select>
