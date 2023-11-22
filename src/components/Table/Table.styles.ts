@@ -21,22 +21,22 @@ export const StyledTableCell = styled(TableCell)({
       width: 100,
       height: 70,
     },
-    '&:nth-child(1)': {
+    '&:nth-of-type(1)': {
       width: '2%',
     },
-    '&:nth-child(2)': {
+    '&:nth-of-type(2)': {
       width: '19%',
     },
-    '&:nth-child(3)': {
+    '&:nth-of-type(3)': {
       width: '16%',
     },
-    '&:nth-child(4)': {
+    '&:nth-of-type(4)': {
       width: '24%',
     },
-    '&:nth-child(5)': {
+    '&:nth-of-type(5)': {
       width: '11%',
     },
-    '&:nth-child(6)': {
+    '&:nth-of-type(6)': {
       width: '9%',
       textAlign: 'center',
     },

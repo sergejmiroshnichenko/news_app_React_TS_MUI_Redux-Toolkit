@@ -1,4 +1,4 @@
-import styles from './DetailsPage.module.scss';
+import styles from './ArticlePage.module.scss';
 import { Layout } from 'components/Layout/Layout.tsx';
 import { useAppSelector } from 'hooks/redux-hooks.ts';
 import { Box, Stack, Typography } from '@mui/material';
@@ -6,7 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
 import { FadeLoader } from 'react-spinners';
 
-export const DetailsPage = () => {
+export const ArticlePage = () => {
   const { articles, error, isLoading } = useAppSelector((state) => state.articles);
   return (
     <Layout className={styles.wrapper}>

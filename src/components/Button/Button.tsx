@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { Button } from '@mui/material';
+import { formatText } from 'services/helpers.ts';
 
 interface PrimaryButtonProps {
   children: ReactNode;
@@ -8,10 +9,6 @@ interface PrimaryButtonProps {
 }
 
 export const PrimaryButton: FC<PrimaryButtonProps> = ({ children, onClick, ...props }) => {
-  const formatText = (text: string) => {
-    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-  };
-
   return (
     <Button
       variant="contained"
