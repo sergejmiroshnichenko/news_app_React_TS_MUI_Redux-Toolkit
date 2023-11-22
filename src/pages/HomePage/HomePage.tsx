@@ -8,26 +8,14 @@ import { categoryOptions, countryOptions } from 'components/Select/Select.data.t
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks.ts';
 import { fetchAllArticles } from 'store/slices/articlesSlice.ts';
-import LinkIcon from '@mui/icons-material/Link';
-import {
-  Box,
-  Paper,
-  Stack,
-  styled,
-  Table,
-  TableBody,
-  TableCell,
-  tableCellClasses,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from '@mui/material';
+import { ScaleLoader } from 'react-spinners';
+import { Box, Stack, Typography } from '@mui/material';
+import { TableComponent } from 'components/Table/Table.tsx';
 
 export const HomePage = () => {
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
-  const { articles, error, isLoading } = useAppSelector((state) => state.articles);
+  const { error, isLoading } = useAppSelector((state) => state.articles);
 
   const dispatch = useAppDispatch();
 
@@ -39,30 +27,13 @@ export const HomePage = () => {
     setIsFiltersVisible(!isFiltersVisible);
   };
 
-  const headers = ['Image', 'Title', 'Authors', 'Description', 'Publication date', 'Original URL'];
-
-  const StyledTableCell = styled(TableCell)({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#EFEFF3',
-      color: 'var(--main-color)',
-      letterSpacing: '0.03em',
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-      borderRight: '1px solid var(--table-color)',
-    },
-  });
-
-  const truncateText = (text: string, maxLength: number) => {
-    return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
-  };
-
   return (
     <Layout className={styles.wrapper}>
       <Stack direction="row" alignItems="center" mt={3.7} mb={2}>
         <Typography variant="h5" component="h2">
           Formula Top Headlines
         </Typography>
+
         <Box marginLeft="auto" display="flex" gap={2.5}>
           <Search setSearchKeyword={() => {}} />
           <PrimaryButton
@@ -74,7 +45,7 @@ export const HomePage = () => {
       </Stack>
 
       {isFiltersVisible && (
-        <Box display="flex" gap={2} mb={1.8}>
+        <Box display="flex" gap={2} mb={2.3}>
           <SelectComponent title="Category" options={categoryOptions} />
           <SelectComponent title="Country" options={countryOptions} />
         </Box>
@@ -85,43 +56,11 @@ export const HomePage = () => {
           Error occurred :{error}
         </Typography>
       ) : isLoading ? (
-        <Paper sx={{ overflow: 'hidden' }}>
-          <TableContainer sx={{ maxHeight: 420 }}>
-            <Table stickyHeader>
-              <TableHead>
-                <TableRow>
-                  {headers.map((header) => (
-                    <StyledTableCell key={header}>{header}</StyledTableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {articles?.map((article) => {
-                  return (
-                    <TableRow key={article.description}>
-                      <StyledTableCell sx={{ width: '12%' }}>
-                        <img width={100} height={70} src={article.urlToImage} alt="image" />
-                      </StyledTableCell>
-                      <StyledTableCell sx={{ width: '23%' }}>
-                        {truncateText(article.title, 50)}
-                      </StyledTableCell>
-                      <StyledTableCell sx={{ width: '16%' }}>{article.author}</StyledTableCell>
-                      <StyledTableCell sx={{ width: '26%' }}>
-                        {truncateText(article.description, 70)}
-                      </StyledTableCell>
-                      <StyledTableCell sx={{ width: '12%' }}>{article.publishedAt}</StyledTableCell>
-                      <TableCell sx={{ width: '11%', textAlign: 'center' }}>
-                        <LinkIcon />
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
+        <TableComponent />
       ) : (
-        <p>Loading...</p>
+        <Box display="flex" alignItems="center" justifyContent="center" height="100vh">
+          <ScaleLoader />
+        </Box>
       )}
     </Layout>
   );
