@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
-import { HomePage } from 'pages/HomePage/HomePage.tsx';
+import { HomePage } from 'pages/HomePage.tsx';
 import { Page404 } from 'pages/Page404.tsx';
-import { ArticlePage } from 'pages/ArticlePage/ArticlePage.tsx';
+import { ArticlePage } from 'pages/ArticlePage.tsx';
 
 export const AppRoutes = () => {
   return (

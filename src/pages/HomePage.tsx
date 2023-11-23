@@ -1,5 +1,4 @@
-import styles from './HomePage.module.scss';
-import { Layout } from 'components/Layout/Layout.tsx';
+import { Layout } from 'components/Layout.tsx';
 import { PrimaryButton } from 'components/Button/Button.tsx';
 import Filter from 'assets/filter.svg';
 import { Search } from 'components/Search/Search.tsx';
@@ -28,7 +27,7 @@ export const HomePage = () => {
   };
 
   return (
-    <Layout className={styles.wrapper}>
+    <Layout className="wrapper">
       <Stack direction="row" alignItems="center" mt={3.7} mb={2}>
         <Typography variant="h5" component="h2">
           Formula Top Headlines

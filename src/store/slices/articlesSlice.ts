@@ -1,6 +1,7 @@
 import { IArticle, IGetArticlesRequest } from 'types/IArticles.types.ts';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { API_KEY, BASE_URL } from 'services/api.ts';
 
 interface ArticlesState {
   articles: IArticle[];
@@ -21,7 +22,7 @@ export const fetchAllArticles = createAsyncThunk<
 >('articles/fetchAllArticles', async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get<IGetArticlesRequest>(
-      'https://newsapi.org/v2/top-headlines?country=us&apiKey=d51f5b077ce848d8ae13421ff6c820ec',
+      `${BASE_URL}?country=us&apiKey=${API_KEY}`,
     );
     if (response.status !== 200) {
       return rejectWithValue('Server error');
@@ -34,7 +35,7 @@ export const fetchAllArticles = createAsyncThunk<
   }
 });
 
-const ArticlesSlice = createSlice({
+const articlesSlice = createSlice({
   name: 'articles',
   initialState,
   reducers: {},
@@ -56,4 +57,4 @@ const ArticlesSlice = createSlice({
   },
 });
 
-export default ArticlesSlice.reducer;
+export default articlesSlice.reducer;

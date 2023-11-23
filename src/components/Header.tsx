@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import Logo from 'assets/logo.svg';
-import styles from './Header.module.scss';
 import { Link } from 'react-router-dom';
 
 interface HeaderProps {
@@ -9,7 +8,7 @@ interface HeaderProps {
 
 export const Header: FC<HeaderProps> = ({ className }) => {
   return (
-    <header className={styles.header}>
+    <header className="header">
       <nav className={className}>
         <Link to={'/'}>
           <img src={Logo} alt="logo image" />

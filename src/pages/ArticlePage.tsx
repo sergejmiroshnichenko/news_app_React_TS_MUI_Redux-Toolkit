@@ -1,5 +1,4 @@
-import styles from './ArticlePage.module.scss';
-import { Layout } from 'components/Layout/Layout.tsx';
+import { Layout } from 'components/Layout.tsx';
 import { useAppSelector } from 'hooks/redux-hooks.ts';
 import { Box, Stack, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -9,7 +8,7 @@ import { FadeLoader } from 'react-spinners';
 export const ArticlePage = () => {
   const { articles, error, isLoading } = useAppSelector((state) => state.articles);
   return (
-    <Layout className={styles.wrapper}>
+    <Layout className="wrapper">
       {error ? (
         <Typography variant="h2" color="error" textAlign="center">
           Error occurred :{error}
