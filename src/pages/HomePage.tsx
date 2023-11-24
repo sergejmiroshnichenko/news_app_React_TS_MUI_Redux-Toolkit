@@ -17,8 +17,8 @@ export const HomePage = () => {
   const { setQuery, searchParams } = useSearchQuery();
 
   const countryArticles = searchParams.get('country') || 'us';
-  const categoryArticles = searchParams.get('categoryArticles') || '';
-  const searchByArticles = searchParams.get('searchByArticles') || '';
+  const categoryArticles = searchParams.get('category') || '';
+  const searchByArticles = searchParams.get('search') || '';
 
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
@@ -50,7 +50,7 @@ export const HomePage = () => {
         </Typography>
 
         <Box marginLeft="auto" display="flex" gap={2.5}>
-          <Search setSearchKeyword={(e) => setQuery({ searchByArticles: e.target.value })} />
+          <Search setSearchKeyword={(e) => setQuery({ search: e.target.value })} />
           <PrimaryButton
             onClick={toggleFilters}
             startIcon={<img src={Filter} alt="filter image" />}>
