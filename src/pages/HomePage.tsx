@@ -10,10 +10,14 @@ import { Box, Stack, Typography } from '@mui/material';
 import { TableComponent } from 'components/Table/Table.tsx';
 import { fetchAllArticles } from 'store/slices/articlesSlice.ts';
 import { useDebounce } from 'hooks/useDebounce.ts';
-import { Search } from 'components/Search/Search.tsx';
+import { Search } from 'components/Search.tsx';
 
 export const HomePage = () => {
   const [searchByArticles, setSearchByArticles] = useState('');
+
+  const [categoryArticles, setCategoryArticles] = useState('');
+
+  const [countryArticles, setCountryArticles] = useState('');
 
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
@@ -24,8 +28,14 @@ export const HomePage = () => {
   const debouncedKeyWords = useDebounce(searchByArticles, 1000);
 
   useEffect(() => {
-    dispatch(fetchAllArticles({ q: debouncedKeyWords }));
-  }, [dispatch, debouncedKeyWords]);
+    dispatch(
+      fetchAllArticles({
+        q: debouncedKeyWords,
+        category: categoryArticles,
+        country: countryArticles,
+      }),
+    );
+  }, [dispatch, debouncedKeyWords, categoryArticles]);
 
   const toggleFilters = () => {
     setIsFiltersVisible(!isFiltersVisible);
@@ -50,8 +60,16 @@ export const HomePage = () => {
 
       {isFiltersVisible && (
         <Box display="flex" gap={2} mb={2.3}>
-          <SelectComponent title="Category" options={categoryOptions} />
-          <SelectComponent title="Country" options={countryOptions} />
+          <SelectComponent
+            title="Category"
+            options={categoryOptions}
+            setProps={(e) => setCategoryArticles(e.target.value)}
+          />
+          <SelectComponent
+            title="Country"
+            options={countryOptions}
+            setProps={(e) => setCountryArticles(e.target.value)}
+          />
         </Box>
       )}
 

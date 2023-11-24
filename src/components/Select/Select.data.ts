@@ -1,3 +1,13 @@
-export const categoryOptions: string[] = ['Business', 'General', 'Health', 'Technology'];
+export const countryOptions: Record<string, string>[] = [
+  { 'United Kingdom': 'uk' },
+  { Ukraine: 'ua' },
+  { Germany: 'ge' },
+  { Poland: 'pl' },
+];
 
-export const countryOptions: string[] = ['United Kingdom', 'Ukraine', 'Germany', 'Poland'];
+export const categoryOptions: Record<string, string>[] = [
+  { Business: 'Business' },
+  { General: 'General' },
+  { Health: 'Health' },
+  { Technology: 'Technology' },
+];

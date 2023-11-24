@@ -19,8 +19,8 @@ export const Search: FC<ISearchProps> = ({ setSearchKeyword }) => {
         }
         sx={{
           '& .MuiOutlinedInput-input': {
-            width: '190px',
-            fontSize: '14px',
+            width: 190,
+            fontSize: 14,
             letterSpacing: '0.02em',
           },
         }}
