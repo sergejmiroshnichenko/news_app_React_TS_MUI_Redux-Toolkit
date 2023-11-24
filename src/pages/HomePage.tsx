@@ -1,5 +1,5 @@
 import { Layout } from 'components/Layout.tsx';
-import { PrimaryButton } from 'components/Button/Button.tsx';
+import { PrimaryButton } from 'components/Button.tsx';
 import Filter from 'assets/filter.svg';
 import { SelectComponent } from 'components/Select/Select.tsx';
 import { categoryOptions, countryOptions } from 'components/Select/Select.data.ts';
@@ -63,12 +63,14 @@ export const HomePage = () => {
           <SelectComponent
             title="Category"
             options={categoryOptions}
-            onSelectionChange={(e) => setCategoryArticles(e.target.value)}
+            onSelectionChange={(value) => setCategoryArticles(value)}
+            value={categoryArticles}
           />
           <SelectComponent
             title="Country"
             options={countryOptions}
-            onSelectionChange={(e) => setCountryArticles(e.target.value)}
+            onSelectionChange={(value) => setCountryArticles(value)}
+            value={countryArticles}
           />
         </Box>
       )}
