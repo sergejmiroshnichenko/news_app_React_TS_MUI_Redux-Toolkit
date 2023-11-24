@@ -11,13 +11,14 @@ import { TableComponent } from 'components/Table/Table.tsx';
 import { fetchAllArticles } from 'store/slices/articlesSlice.ts';
 import { useDebounce } from 'hooks/useDebounce.ts';
 import { Search } from 'components/Search.tsx';
+import { useSearchQuery } from 'hooks/useSearchQuery.ts';
 
 export const HomePage = () => {
-  const [searchByArticles, setSearchByArticles] = useState('');
+  const { setQuery, searchParams } = useSearchQuery();
 
-  const [categoryArticles, setCategoryArticles] = useState('');
-
-  const [countryArticles, setCountryArticles] = useState('us');
+  const countryArticles = searchParams.get('country') || 'us';
+  const categoryArticles = searchParams.get('categoryArticles') || '';
+  const searchByArticles = searchParams.get('searchByArticles') || '';
 
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
@@ -49,7 +50,7 @@ export const HomePage = () => {
         </Typography>
 
         <Box marginLeft="auto" display="flex" gap={2.5}>
-          <Search setSearchKeyword={(e) => setSearchByArticles(e.target.value)} />
+          <Search setSearchKeyword={(e) => setQuery({ searchByArticles: e.target.value })} />
           <PrimaryButton
             onClick={toggleFilters}
             startIcon={<img src={Filter} alt="filter image" />}>
@@ -63,13 +64,13 @@ export const HomePage = () => {
           <SelectComponent
             title="Category"
             options={categoryOptions}
-            onSelectionChange={(value) => setCategoryArticles(value)}
+            onSelectionChange={(value) => setQuery({ category: value })}
             value={categoryArticles}
           />
           <SelectComponent
             title="Country"
             options={countryOptions}
-            onSelectionChange={(value) => setCountryArticles(value)}
+            onSelectionChange={(value) => setQuery({ country: value })}
             value={countryArticles}
           />
         </Box>
