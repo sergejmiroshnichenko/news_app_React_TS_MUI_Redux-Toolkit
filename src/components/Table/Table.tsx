@@ -1,4 +1,5 @@
 import {
+  Link,
   Paper,
   Table,
   TableBody,
@@ -45,7 +46,7 @@ export const TableComponent = () => {
           <TableBody>
             {articles
               ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(({ title, author, description, publishedAt, urlToImage }) => {
+              .map(({ title, author, description, publishedAt, urlToImage, url }) => {
                 return (
                   <TableRow key={title}>
                     <StyledTableCell>
@@ -59,7 +60,9 @@ export const TableComponent = () => {
                     <StyledTableCell>{truncateText(description, 75)}</StyledTableCell>
                     <StyledTableCell>{publishedAt.slice(0, 10)}</StyledTableCell>
                     <StyledTableCell>
-                      <LinkIcon />
+                      <Link target="_blank" rel="noopener noreferrer" href={url}>
+                        <LinkIcon />
+                      </Link>
                     </StyledTableCell>
                   </TableRow>
                 );
