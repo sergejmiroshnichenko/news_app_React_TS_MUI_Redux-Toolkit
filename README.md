@@ -10,6 +10,20 @@ Run the following commands:
 2. npm install
 3. npm run dev
 
+##   Project Description:
+
+The project is a news application that uses an API to retrieve news data using the https://newsapi.org/docs/endpoints/top-headlines. To access the API data it is necessary to register and get API Key.
+
+The application consists of two main pages:
+
+- **Article list page:**
+        Contains a table with columns to display image, title, author, publication date and news source link.
+        Also provides a field to search for articles by key headline and the ability to select filters by country and news category.
+  - **Article preview page:**
+    Provides details about the selected article.
+
+    Functionality includes the ability to search for articles by keyword, filter news articles by country and category, and provide detailed information about a particular article when browsing.
+
 ## Libraries and frameworks
 
 The project uses the following main libraries and frameworks:
