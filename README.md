@@ -19,10 +19,10 @@ The application consists of two main pages:
 - **Article list page:**
         Contains a table with columns to display image, title, author, publication date and news source link.
         Also provides a field to search for articles by key headline and the ability to select filters by country and news category.
-  - **Article preview page:**
+- **Article preview page:**
     Provides details about the selected article.
 
-    Functionality includes the ability to search for articles by keyword, filter news articles by country and category, and provide detailed information about a particular article when browsing.
+Functionality includes the ability to search for articles by keyword, filter news articles by country and category, and provide detailed information about a particular article when browsing.
 
 ## Libraries and frameworks
 
