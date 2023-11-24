@@ -68,7 +68,7 @@ export const TableComponent = () => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 15]}
+        rowsPerPageOptions={[5, 10, 15, 20]}
         component="div"
         count={articles.length}
         rowsPerPage={rowsPerPage}

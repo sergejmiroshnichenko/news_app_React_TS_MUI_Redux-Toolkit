@@ -1,28 +1,34 @@
 import { IArticle, IGetArticlesRequest } from 'types/IArticles.types.ts';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { API_KEY, BASE_URL } from 'services/api.ts';
 
 interface ArticlesState {
   articles: IArticle[];
+  // searchForArticle: string;
   isLoading: 'loading' | 'resolved' | 'rejected' | null;
   error: string;
 }
 
 const initialState: ArticlesState = {
   articles: [],
+  // searchForArticle: '',
   isLoading: null,
   error: '',
 };
 
 export const fetchAllArticles = createAsyncThunk<
   IGetArticlesRequest,
-  undefined,
+  { q: string },
   { rejectValue: string }
->('articles/fetchAllArticles', async (_, { rejectWithValue }) => {
+>('articles/fetchAllArticles', async (params, { rejectWithValue }) => {
   try {
+    const { q } = params;
     const response = await axios.get<IGetArticlesRequest>(
       `${BASE_URL}?country=us&apiKey=${API_KEY}`,
+      {
+        params: { q },
+      },
     );
     if (response.status !== 200) {
       return rejectWithValue('Server error');
@@ -38,23 +44,30 @@ export const fetchAllArticles = createAsyncThunk<
 const articlesSlice = createSlice({
   name: 'articles',
   initialState,
-  reducers: {},
+  reducers: {
+    // setSearchForArticle: (state, action: PayloadAction<string>) => {
+    //   state.searchForArticle = action.payload;
+    //   // data.map((obj) => obj.name.toLowerCase().includes(e.target.value.toLowerCase())
+    // },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllArticles.pending, (state) => {
         state.isLoading = 'loading';
         state.error = '';
       })
-      .addCase(fetchAllArticles.fulfilled, (state, action) => {
+      .addCase(fetchAllArticles.fulfilled, (state, action: PayloadAction<IGetArticlesRequest>) => {
         state.isLoading = 'resolved';
         state.articles = action.payload.articles;
         state.error = '';
       })
-      .addCase(fetchAllArticles.rejected, (state, action) => {
+      .addCase(fetchAllArticles.rejected, (state, action: PayloadAction<string | undefined>) => {
         state.isLoading = 'rejected';
         state.error = action.payload as string;
       });
   },
 });
+
+// export const { setSearchForArticle } = articlesSlice.actions;
 
 export default articlesSlice.reducer;

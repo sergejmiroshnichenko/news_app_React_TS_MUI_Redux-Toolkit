@@ -1,26 +1,31 @@
 import { Layout } from 'components/Layout.tsx';
 import { PrimaryButton } from 'components/Button/Button.tsx';
 import Filter from 'assets/filter.svg';
-import { Search } from 'components/Search/Search.tsx';
 import { SelectComponent } from 'components/Select/Select.tsx';
 import { categoryOptions, countryOptions } from 'components/Select/Select.data.ts';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks/redux-hooks.ts';
-import { fetchAllArticles } from 'store/slices/articlesSlice.ts';
 import { ScaleLoader } from 'react-spinners';
 import { Box, Stack, Typography } from '@mui/material';
 import { TableComponent } from 'components/Table/Table.tsx';
+import { fetchAllArticles } from 'store/slices/articlesSlice.ts';
+import { useDebounce } from 'hooks/useDebounce.ts';
+import { Search } from 'components/Search/Search.tsx';
 
 export const HomePage = () => {
+  const [searchByArticles, setSearchByArticles] = useState('');
+
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
   const { error, isLoading } = useAppSelector((state) => state.articles);
 
   const dispatch = useAppDispatch();
 
+  const debouncedKeyWords = useDebounce(searchByArticles, 1000);
+
   useEffect(() => {
-    dispatch(fetchAllArticles());
-  }, [dispatch]);
+    dispatch(fetchAllArticles({ q: debouncedKeyWords }));
+  }, [dispatch, debouncedKeyWords]);
 
   const toggleFilters = () => {
     setIsFiltersVisible(!isFiltersVisible);
@@ -34,7 +39,7 @@ export const HomePage = () => {
         </Typography>
 
         <Box marginLeft="auto" display="flex" gap={2.5}>
-          <Search setSearchKeyword={() => {}} />
+          <Search setSearchKeyword={(e) => setSearchByArticles(e.target.value)} />
           <PrimaryButton
             onClick={toggleFilters}
             startIcon={<img src={Filter} alt="filter image" />}>
