@@ -1,7 +1,7 @@
 export const countryOptions: Record<string, string>[] = [
-  { 'United Kingdom': 'uk' },
+  { 'United Kingdom': 'gb' },
   { Ukraine: 'ua' },
-  { Germany: 'ge' },
+  { Germany: 'de' },
   { Poland: 'pl' },
 ];
 

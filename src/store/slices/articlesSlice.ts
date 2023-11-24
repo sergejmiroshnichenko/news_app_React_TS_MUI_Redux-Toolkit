@@ -17,17 +17,20 @@ const initialState: ArticlesState = {
 
 export const fetchAllArticles = createAsyncThunk<
   IGetArticlesRequest,
-  { q: string; category: string; country: string },
-  { rejectValue: string }
+  {
+    q: string;
+    category: string;
+    country: string;
+  },
+  {
+    rejectValue: string;
+  }
 >('articles/fetchAllArticles', async (params, { rejectWithValue }) => {
   try {
-    const { q, category, country } = params;
-    const response = await axios.get<IGetArticlesRequest>(
-      `${BASE_URL}?country=us&apiKey=${API_KEY}`,
-      {
-        params: { q, category, country },
-      },
-    );
+    const { q, category, country = 'us' } = params;
+    const response = await axios.get<IGetArticlesRequest>(BASE_URL, {
+      params: { q, category, country, apiKey: API_KEY },
+    });
 
     if (response.status !== 200) {
       return rejectWithValue('Server error');

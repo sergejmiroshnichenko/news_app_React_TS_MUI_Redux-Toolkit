@@ -17,7 +17,7 @@ export const HomePage = () => {
 
   const [categoryArticles, setCategoryArticles] = useState('');
 
-  const [countryArticles, setCountryArticles] = useState('');
+  const [countryArticles, setCountryArticles] = useState('us');
 
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
@@ -35,7 +35,7 @@ export const HomePage = () => {
         country: countryArticles,
       }),
     );
-  }, [dispatch, debouncedKeyWords, categoryArticles]);
+  }, [dispatch, debouncedKeyWords, categoryArticles, countryArticles]);
 
   const toggleFilters = () => {
     setIsFiltersVisible(!isFiltersVisible);
@@ -63,12 +63,12 @@ export const HomePage = () => {
           <SelectComponent
             title="Category"
             options={categoryOptions}
-            setProps={(e) => setCategoryArticles(e.target.value)}
+            onSelectionChange={(e) => setCategoryArticles(e.target.value)}
           />
           <SelectComponent
             title="Country"
             options={countryOptions}
-            setProps={(e) => setCountryArticles(e.target.value)}
+            onSelectionChange={(e) => setCountryArticles(e.target.value)}
           />
         </Box>
       )}
