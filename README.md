@@ -1,30 +1,22 @@
-# React + TypeScript + Vite
+# News app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Requirements
+- Node.js (recommended ver: 16.16.0)
 
-Currently, two official plugins are available:
+To run the application locally, clone the repository, install the dependencies, and run the application.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Run the following commands:
+1. git clone https://github.com/sergejmiroshnichenko/news_app_bintime.git
+2. npm install
+3. npm run dev
 
-## Expanding the ESLint configuration
+## Libraries and frameworks
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The project uses the following main libraries and frameworks:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **react** (ver. 18.2.0) и **react-dom** (ver. 18.2.0): Basic libraries for creating UI.
+- **typescript** (ver. ^5.0.2"): Provides static typing for JavaScript. It is used to increase the reliability of development and the ability to detect run-time errors.
+- **@reduxjs/toolkit** (ver. 1.9.7): Used to manage the global state of the application.
+- **react-router-dom** (ver. 6.18.0): Library for implementing routing.
+- **@mui/material** (ver. 5.14.18): Library for styles components.
+- **axios** (ver. 1.6.1): Library for executing HTTP requests, used to interact with the API.
